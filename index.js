@@ -1,20 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const dotenv=require("dotenv")
 const postRoutes = require("./routes/postRoutes");
 const auth=require("./routes/auth")
 
 const blogRoutes = require("./routes/blog");
 const app = express();
 const PORT = 8000;
+// import dotenv from "dotenv";
 
+// Load environment variables
+dotenv.config();
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://tejas:1fp9VTFu1nPeuVMg@hvpmspost.jtckgrx.mongodb.net", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
